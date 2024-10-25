@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Agregar Paciente</title> <!-- Cambiado a "Agregar Paciente" -->
+
+    <script type="module" src="lib/js/submitForm.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
+</head>
+
+<body>
+    <form onsubmit="submitForm('srv/paciente-agrega.php', event)  
+    .then(modelo => location.href = 'index.html')
+    .catch(muestraError)">
+        <h1>Agregar Paciente</h1> <!-- Cambiado el encabezado -->
+
+        <p><a href="index.html">Cancelar</a></p>
+
+        <p>
+            <label>
+                Nombre *
+                <input name="nombre" required> <!-- Se agrega "required" para el campo obligatorio -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Apellido Paterno *
+                <input name="apellidoP" required> <!-- Agregado para el apellido paterno -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Apellido Materno *
+                <input name="apellidoM" required> <!-- Agregado para el apellido materno -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Fecha de Nacimiento *
+                <input type="date" name="fecha_nacimiento" required> <!-- Agregado para la fecha de nacimiento -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Teléfono *
+                <input name="telefono" required> <!-- Agregado para el teléfono -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Usuario *
+                <input name="usuario" required> <!-- Agregado para el usuario -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Correo *
+                <input type="email" name="correo" required> <!-- Agregado para el correo -->
+            </label>
+        </p>
+
+        <p>* Obligatorio</p>
+
+        <p><button type="submit">Agregar</button></p>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Modificar Paciente</title> <!-- Cambiado a "Modificar Paciente" -->
+
+    <script type="module" src="lib/js/consumeJson.js"></script>
+    <script type="module" src="lib/js/submitForm.js"></script>
+    <script type="module" src="lib/js/muestraObjeto.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
+
+    <script>
+        // Obtiene los parámetros de la página.
+        const params = new URL(location.href).searchParams;
+    </script>
+
+</head>
+
+<body onload="if (params.size > 0) {
+    consumeJson('srv/paciente.php?' + params)  
+        .then(respuesta => muestraObjeto(forma, respuesta.body))
+        .catch(muestraError);
+}">
+
+    <form id="forma" onsubmit="submitForm('srv/paciente-modifica.php', event)  
+        .then(respuesta => location.href = 'index.html')
+        .catch(muestraError)">
+
+        <h1>Modificar Paciente</h1> <!-- Cambiado el encabezado -->
+
+        <p><a href="index.html">Cancelar</a></p>
+
+        <input name="id" type="hidden"> <!-- Campo oculto para el ID del paciente -->
+
+        <p>
+            <label>
+                Nombre *
+                <input name="nombre" value="Cargando&hellip;" required> <!-- Se agrega "required" para el campo -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Apellido Paterno *
+                <input name="apellidoP" value="Cargando&hellip;" required> <!-- Agregado para el apellido paterno -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Apellido Materno *
+                <input name="apellidoM" value="Cargando&hellip;" required> <!-- Agregado para el apellido materno -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Fecha de Nacimiento *
+                <input type="date" name="fecha_nacimiento" value="Cargando&hellip;" required> <!-- Agregado para la fecha de nacimiento -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Teléfono *
+                <input name="telefono" value="Cargando&hellip;" required> <!-- Agregado para el teléfono -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Usuario *
+                <input name="usuario" value="Cargando&hellip;" required> <!-- Agregado para el usuario -->
+            </label>
+        </p>
+
+        <p>
+            <label>
+                Correo *
+                <input type="email" name="correo" value="Cargando&hellip;" required> <!-- Agregado para el correo -->
+            </label>
+        </p>
+
+        <p>* Obligatorio</p>
+
+        <p>
+            <button type="submit">Guardar</button>
+
+            <button type="button" onclick="
+            if (params.size > 0 && confirm('Confirma la eliminación')) {
+                consumeJson('srv/paciente-elimina.php?' + params)  
+                    .then(() => location.href = 'index.html')
+                    .catch(muestraError);
+            }">
+                Eliminar
+            </button>
+        </p>
+
+    </form>
+
+</body>
+
+</html>
